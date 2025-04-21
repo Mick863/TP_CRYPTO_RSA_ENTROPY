@@ -3,9 +3,13 @@
         {
             "name": "Linux",
             "includePath": [
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/src",
                 "${workspaceFolder}/**"
             ],
-            "defines": [],
+            "defines": [
+                "__FAKE_AVR__" // <-- optionnelle pour du code conditionnel
+            ],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "c17",
             "cppStandard": "gnu++17",

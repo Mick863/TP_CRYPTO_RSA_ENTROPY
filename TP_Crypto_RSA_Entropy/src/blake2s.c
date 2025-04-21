@@ -1,8 +1,14 @@
 //blake2s.c
 #include <stdint.h>
 #include <string.h>
-#include <avr/pgmspace.h>
+//#include <avr/pgmspace.h> 
+
 #include "blake2s.h"
+#ifdef __AVR__
+#include <avr/pgmspace.h>
+#else
+#include "fake_avr.h"
+#endif
 
 #define BLAKE2S_BLOCKBYTES 64
 #define BLAKE2S_ERRCHECK 0

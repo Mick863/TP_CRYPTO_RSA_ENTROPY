@@ -1,6 +1,5 @@
-# === Variables ===
 CC = gcc
-CFLAGS = -Wall -Iinclude -std=c11
+CFLAGS = -Wall -Iinclude -std=c11 -O1
 SRCDIR = src
 BUILDDIR = build
 TARGET = $(BUILDDIR)/rsa_sim
@@ -8,7 +7,6 @@ TARGET = $(BUILDDIR)/rsa_sim
 SOURCES = $(wildcard $(SRCDIR)/*.c)
 OBJECTS = $(patsubst $(SRCDIR)/%.c, $(BUILDDIR)/%.o, $(SOURCES))
 
-# === Règles ===
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
@@ -19,9 +17,14 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(BUILDDIR)
+	@echo "Nettoyage du build..."
+	@rm -rf $(BUILDDIR)
 
 run: all
 	./$(TARGET)
 
-.PHONY: all clean run
+debug: CFLAGS += -g
+debug: clean all
+
+.PHONY: all clean run debug
+
